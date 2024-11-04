@@ -1,0 +1,23 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+/* Set the color of the paragraph text to black */
+p {
+  color: black;
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100; /* Semi-bold */
+}
+
+/* Set the color of the h1 header text to black */
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400; /* Semi-bold */
+  font-size: 40px; /* Font size */
+  color: black; /* Text color */
+}
+
+/* Remove background color if there is any applied */
+body, .container {
+  background-color: transparent;
+}

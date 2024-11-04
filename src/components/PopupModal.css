@@ -1,0 +1,118 @@
+.styled-date-picker {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  cursor: pointer;
+  color: #495057;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.styled-date-picker:hover {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.date-picker-container {
+  position: absolute;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 300px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.date-picker-container .rdrCalendarWrapper {
+  width: 100%;
+}
+
+.custom-modal .modal-body-layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.modal-body-layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-content {
+  flex: 2;
+  padding-right: 1rem;
+}
+
+.right-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.robot-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+/*nextpop*/
+.custom-next-step-modal .modal-body {
+  padding: 2rem;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  border-radius: 20px;
+  padding: 0.25rem 1rem;
+  font-size: 0.875rem;
+}
+
+.d-flex.align-items-center {
+  margin-top: 1rem;
+}
+
+.modal-footer .btn-success {
+  background-color: #8db600;
+  border: none;
+}
+.narrow-form-group {
+  max-width: 400px; /* Adjust the width to make the form narrower */
+  /* Remove margin for left alignment */
+}
+
+.narrow-form-group .form-control,
+.narrow-form-group .form-select {
+  width: 100%; /* Ensure controls fill the narrower width */
+}
+.robot-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.narrow-form-group {
+  max-width: 100%; /* Keeps the form inputs aligned to the left within the column */
+}
+
+@media (max-width: 768px) {
+  .robot-image {
+    max-width: 80%;
+    margin: 1rem auto;
+  }
+}

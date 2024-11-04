@@ -1,0 +1,135 @@
+/* Main Container */
+.itinerary-page {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Day Navigation Styling */
+.day-navigation {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ddd;
+}
+
+.day-scroll-container {
+  display: inline-flex;
+  gap: 0.75rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.day-button {
+  border: 1px solid #ddd;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  white-space: nowrap;
+}
+
+.day-button:hover {
+  background-color: #f0f0f0;
+}
+
+.active-day-button {
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Itinerary Sections */
+.itinerary-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+/* Weather Section */
+.weather-section {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.weather-chart {
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
+
+.map-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.map-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Image Gallery */
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.image-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hotel Recommendations Section */
+.hotel-recommendations {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.hotel-recommendations h5 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.hotel-recommendations ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.hotel-recommendations li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.hotel-recommendations button {
+  background: none;
+  color: #007bff;
+  border: none;
+  padding: 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.hotel-recommendations button:hover {
+  text-decoration: underline;
+}
