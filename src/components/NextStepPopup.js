@@ -1,15 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './PopupModal.css';
 
-const NextStepPopup = ({ show, handleClose }) => {
-  const navigate = useNavigate(); // Initialize navigate
+const NextStepPopup = ({ show, handleClose, formData }) => {
+  const navigate = useNavigate();
 
-  // Function to handle the itinerary generation button click
-  const handleGenerateItinerary = () => {
-    handleClose(); // Close the modal
-    navigate('/itinerary'); // Navigate to the itinerary page
+  const [accommodationType, setAccommodationType] = useState('');
+  const [hotelRating, setHotelRating] = useState('');
+  const [interests, setInterests] = useState([]);
+  const [mustVisit, setMustVisit] = useState('');
+  const [avoid, setAvoid] = useState('');
+
+  const toggleInterest = (interest) => {
+    setInterests((prevInterests) =>
+      prevInterests.includes(interest) ? prevInterests.filter((i) => i !== interest) : [...prevInterests, interest]
+    );
+  };
+
+  const handleGenerateItinerary = async () => {
+    const requestData = {
+      ...formData,
+      accommodationType,
+      hotelRating,
+      priceRange: formData.budget,
+      interests,
+      mustVisit,
+      avoid,
+    };
+
+    try {
+      const response = await axios.post('http://localhost:5000/generate-itinerary', requestData);
+      const itinerary = response.data.itinerary;
+      navigate('/itinerary', { state: { itinerary } });
+    } catch (error) {
+      console.error('Error generating itinerary:', error);
+    }
+
+    handleClose();
   };
 
   return (
@@ -19,56 +48,53 @@ const NextStepPopup = ({ show, handleClose }) => {
       </Modal.Header>
       <Modal.Body>
         <Row>
-          {/* Form Column */}
           <Col xs={12} md={8}>
             <h5 className="section-title">Hotel Preferences</h5>
-            <Form.Group className="mb-3 narrow-form-group">
+            <Form.Group className="mb-3">
               <Form.Label>What type of accommodation are you looking for?</Form.Label>
-              <Form.Select>
-                <option>Luxury Hotel</option>
-                <option>Standard Hotel</option>
-                <option>Budget Hotel</option>
+              <Form.Select onChange={(e) => setAccommodationType(e.target.value)}>
+                <option value="">Select</option>
+                <option value="Luxury Hotel">Luxury Hotel</option>
+                <option value="Standard Hotel">Standard Hotel</option>
+                <option value="Budget Hotel">Budget Hotel</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group className="mb-3 narrow-form-group">
+            <Form.Group className="mb-3">
               <Form.Label>What is your preferred hotel star rating?</Form.Label>
-              <Form.Select>
-                <option>5-Star</option>
-                <option>4-Star</option>
-                <option>3-Star</option>
+              <Form.Select onChange={(e) => setHotelRating(e.target.value)}>
+                <option value="">Select</option>
+                <option value="5-Star">5-Star</option>
+                <option value="4-Star">4-Star</option>
+                <option value="3-Star">3-Star</option>
               </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3 narrow-form-group">
-              <Form.Label>Price Range</Form.Label>
-              <div className="d-flex align-items-center">
-                <span>$18</span>
-                <Form.Range min="18" max="5000" className="mx-3" />
-                <span>$5000</span>
-              </div>
             </Form.Group>
 
             <h5 className="section-title">Customize Your Trip More</h5>
-            <Form.Group className="mb-3 narrow-form-group">
+            <Form.Group className="mb-3">
               <Form.Label>Interests and Preferences</Form.Label>
               <div className="tag-container">
-                <Button variant="outline-secondary" className="tag">Cultural sites</Button>
-                <Button variant="outline-secondary" className="tag">Adventure activities</Button>
-                <Button variant="outline-secondary" className="tag">Nature and wildlife</Button>
-                <Button variant="outline-secondary" className="tag">Beach and relaxation</Button>
-                <Button variant="outline-secondary" className="tag">City tours</Button>
+                {['Cultural sites', 'Adventure activities', 'Nature and wildlife', 'Beach and relaxation', 'City tours'].map((interest) => (
+                  <Button
+                    key={interest}
+                    variant="outline-secondary"
+                    className={`tag ${interests.includes(interest) ? 'active' : ''}`}
+                    onClick={() => toggleInterest(interest)}
+                  >
+                    {interest}
+                  </Button>
+                ))}
               </div>
             </Form.Group>
-            <Form.Group className="mb-3 narrow-form-group">
+            <Form.Group className="mb-3">
               <Form.Label>Must-Visit Places</Form.Label>
-              <Form.Control type="text" placeholder="Enter places/activities" />
+              <Form.Control type="text" placeholder="Enter places/activities" value={mustVisit} onChange={(e) => setMustVisit(e.target.value)} />
             </Form.Group>
-            <Form.Group className="mb-3 narrow-form-group">
+            <Form.Group className="mb-3">
               <Form.Label>Any Places to Avoid</Form.Label>
-              <Form.Control type="text" placeholder="Enter places" />
+              <Form.Control type="text" placeholder="Enter places" value={avoid} onChange={(e) => setAvoid(e.target.value)} />
             </Form.Group>
           </Col>
 
-          {/* Image Column */}
           <Col xs={12} md={4} className="d-flex align-items-center justify-content-center">
             <img src={require('../image/Pop2.png')} alt="Robot" className="robot-image" />
           </Col>
