@@ -36,6 +36,18 @@ const PopupModal = ({ show, handleClose }) => {
     handleClose();
   };
 
+  const newLocal = <NextStepPopup
+    show={showNextPopup}
+    handleClose={() => setShowNextPopup(false)}
+    formData={{
+      budget, // pass budget here
+
+      // other form data fields
+      adults,
+      children,
+      startDate: dateRange[0].startDate,
+      endDate: dateRange[0].endDate,
+    }} />;
   return (
     <>
       <Modal show={show} onHide={handleClose} centered size="lg" className="custom-modal">
@@ -109,17 +121,7 @@ const PopupModal = ({ show, handleClose }) => {
         </Modal.Footer>
       </Modal>
 
-      <NextStepPopup
-        show={showNextPopup}
-        handleClose={() => setShowNextPopup(false)}
-        formData={{
-          dateRange,
-          startTime,
-          budget,
-          adults,
-          children
-        }}
-      />
+      {newLocal}
     </>
   );
 };

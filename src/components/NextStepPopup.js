@@ -18,28 +18,28 @@ const NextStepPopup = ({ show, handleClose, formData }) => {
       prevInterests.includes(interest) ? prevInterests.filter((i) => i !== interest) : [...prevInterests, interest]
     );
   };
-
-  const handleGenerateItinerary = async () => {
-    const requestData = {
-      ...formData,
-      accommodationType,
-      hotelRating,
-      priceRange: formData.budget,
-      interests,
-      mustVisit,
-      avoid,
-    };
-
-    try {
-      const response = await axios.post('http://localhost:5000/generate-itinerary', requestData);
-      const itinerary = response.data.itinerary;
-      navigate('/itinerary', { state: { itinerary } });
-    } catch (error) {
-      console.error('Error generating itinerary:', error);
-    }
-
-    handleClose();
+const handleGenerateItinerary = async () => {
+  // Ensure formData exists; otherwise, provide an empty object
+  const requestData = {
+    ...formData, // this includes budget from PopupModal
+    accommodationType,
+    hotelRating,
+    interests,
+    mustVisit,
+    avoid,
   };
+  
+
+  try {
+    const response = await axios.post('http://localhost:5000/generate-itinerary', requestData);
+    const itinerary = response.data.itinerary;
+    navigate('/itinerary', { state: { itinerary } });
+  } catch (error) {
+    console.error('Error generating itinerary:', error);
+  }
+
+  handleClose();
+};
 
   return (
     <Modal show={show} onHide={handleClose} centered size="lg" className="custom-next-step-modal">
